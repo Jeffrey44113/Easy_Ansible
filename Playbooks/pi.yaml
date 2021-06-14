@@ -1,0 +1,6 @@
+---
+  host: all
+# Tasks TODO:
+# - Make sure Git is installed
+# - check what Needs to be installed and ensure state=installed
+#
