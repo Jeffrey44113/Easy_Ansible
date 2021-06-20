@@ -10,8 +10,8 @@ web:
 
 pi:
   hosts:
-    pi: 192.168.0.31
-    octo: 192.168.0.30
+    192.168.0.31
+    192.168.0.30
 
 AllTogether:
   children:
