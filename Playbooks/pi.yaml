@@ -1,0 +1,13 @@
+---
+  host: pi
+  become: yes
+
+
+  tasks:
+  - name: Install Git
+    yum:  
+
+# Tasks TODO:
+# - Make sure Git is installed
+# - check what Needs to be installed and ensure state=installed
+#
