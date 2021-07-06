@@ -1,4 +1,5 @@
 ---
+#excersises playbook
 - hosts: app
   become: yes
 
@@ -9,4 +10,27 @@
         state: present
 
     - name: Install apache
-      yum: name=httpd state=present
+      yum:
+        name:
+          - httpd
+          - httpd-devel
+        state: present
+
+    - name: Copy Config
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - src: httpd.conf
+          dest: /etc/httpd/conf/httpd.conf
+        - src: httpd-vhosts.conf
+          dest: /etc/httpd/conf/httpd-vhosts.conf
+
+    - name: Make sure apache is started now and at boot
+      service:
+        name: httpd
+        state: started
+        enabled: yes
