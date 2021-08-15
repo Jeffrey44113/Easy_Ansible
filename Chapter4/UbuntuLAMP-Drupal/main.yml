@@ -1,5 +1,5 @@
 ---
-  - hosts: all
+  - hosts: ub1
     become: yes
 
     vars_files:

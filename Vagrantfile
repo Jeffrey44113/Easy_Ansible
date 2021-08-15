@@ -29,4 +29,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     db.vm.hostname = "orc-db.test"
     db.vm.network :private_network, ip: "192.168.60.6"
   end
+
+    #Ubuntu VM:
+    config.vm.box = "bento/ubuntu-18.04"
+    config.vm.define "ub1" do |app|
+      app.vm.hostname = "orc-ub1.test"
+      app.vm.network :private_network, ip: "192.168.60.7"
+  end
 end
