@@ -6,6 +6,6 @@
   mysql_user:
     name: "{{ domain }}"
     password: "1234"
-    priv: "{{ domain}}.*:ALL"
+    priv: "{{ domain }}.*:ALL"
     host: localhost
     state: present
