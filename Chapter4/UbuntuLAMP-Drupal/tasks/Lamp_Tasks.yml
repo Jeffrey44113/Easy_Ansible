@@ -2,11 +2,11 @@
 - name: Get software for apt repository management
   apt:
     state: present
-    name: 
+    name:
       - python3-apt
       - python3-pycurl
 
-- name: Add ondrej Repository for later versions of PHP.
+- name: Add ondrej Repository for later versions of PHP
   apt_repository: repo='ppa:ondrej/php' update_cache=yes
 
 - name: "Install apache, mysql, PHP and other dependencies"
@@ -50,7 +50,7 @@
   notify: restart Apache2
 
 - name: Add Apache virtualhost for drupal.
-  template: 
+  template:
     src: "templates/drupal.test.conf.j2"
     dest: "/etc/apache2/sites-available/{{ domain }}.test.conf"
     owner: root
@@ -65,7 +65,7 @@
   notify: restart Apache2
 
 - name: Disable the default site.
-  command: > 
+  command: >
     a2dissite 000-default
     removes=/etc/apache2/sites-enabled/000-default.conf
   notify: restart Apache2

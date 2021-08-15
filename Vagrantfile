@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
     #Ubuntu VM:
-    config.vm.box = "bento/ubuntu-18.04"
+    config.vm.box = "bento/ubuntu-20.04"
     config.vm.define "ub1" do |app|
       app.vm.hostname = "orc-ub1.test"
       app.vm.network :private_network, ip: "192.168.60.7"

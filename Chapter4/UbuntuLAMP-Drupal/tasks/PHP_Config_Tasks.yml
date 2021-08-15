@@ -15,7 +15,7 @@
     mode: 0755
 
 - name: Run composer installer
-  command: > 
+  command: >
     php composer-installer.php
     chdir=/tmp
     creates=/usr/local/bin/composer
@@ -28,7 +28,7 @@
 # This part creates a drupal project with composer, I think this would rather be usefull in a seperate task
 - name: Ensure drupal directory exists.
   file:
-    path: "{{ drupa_core_path }}"
+    path: "{{ drupal_core_path }}"
     state: directory
     owner: www-data
     group: www-data
@@ -39,7 +39,7 @@
   register: drupal_composer_json
 
 - name: Create drupal project
-  composer: 
+  composer:
     command: create-project
     arguments: drupal/recommended-project "{{ drupal_core_path }}"
     working_dir: "{{ drupal_core_path }}"
@@ -54,10 +54,10 @@
     arguments: drush/drush:10.*
     working_dir: "{{ drupal_core_path }}"
   become_user: www-data
-  when: not drupal_compuser_json.stat.exists
+  when: not drupal_composer_json.stat.exists
 
 - name: Install drupal
-  command: > 
+  command: >
     vendor/bin/drush si -y --site-name="{{ drupal_site_name }}"
     --account-name=admin
     --account-pass=admin
