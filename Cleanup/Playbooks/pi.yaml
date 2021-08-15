@@ -5,7 +5,7 @@
 
   tasks:
   - name: Install Git
-    yum:  
+    package:  
 
 # Tasks TODO:
 # - Make sure Git is installed

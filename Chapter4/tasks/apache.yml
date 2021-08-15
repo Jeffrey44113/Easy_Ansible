@@ -1,0 +1,5 @@
+---
+  - name: Ensure Apache is installed.
+    package:
+      name: "{{ Apache_Name }}"
+      state: present
