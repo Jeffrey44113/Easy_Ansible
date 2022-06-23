@@ -1,0 +1,26 @@
+---
+- name: updating anything if needed
+  ansible.builtin.apt:
+    upgrade: dist
+    update_cache: true
+
+- name: installing screen just in case
+  ansible.builtin.package:
+    name: screen
+    state: present
+
+- name: make sure mine_folder exits
+  ansible.builtin.file:
+    path: "{{ mine_folder }}"
+    owner: jeffrey
+    group: jeffrey
+    mode: 0755
+    state: directory
+
+- name: downloading the jar file
+  ansible.builtin.get_url:
+    url: "{{ mine_link }}"
+    dest: "{{ mine_folder }}forge_server.jar"
+    owner: jeffrey
+    group: jeffrey
+    mode: 0775

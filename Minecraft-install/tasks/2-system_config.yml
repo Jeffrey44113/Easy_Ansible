@@ -1,0 +1,15 @@
+---
+- name: copy over template service file
+  ansible.builtin.template:
+    src: templates/minecraft.service.j2
+    dest: /etc/systemd/system/minecraft.service
+    owner: root
+    group: root
+    mode: 0664
+
+- name: reloading systemd and enabling the minecraft service
+  ansible.builtin.systemd:
+    daemon_reload: true
+    name: minecraft
+    state: started
+    enabled: true

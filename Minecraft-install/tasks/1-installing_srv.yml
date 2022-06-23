@@ -1,0 +1,43 @@
+---
+- name: installing server with command line
+  ansible.builtin.command: java -jar forge_server.jar --installServer
+  args:
+    chdir: "{{ mine_folder }}"
+  register: java_server_install
+  changed_when: not mine_folder
+
+- name: running run.sh first time
+  ansible.builtin.command: /bin/bash run.sh
+  args:
+    chdir: "{{ mine_folder }}"
+  register: run01
+  changed_when: not mine_folder
+
+- name: change line in file eula
+  ansible.builtin.lineinfile:
+    path: "{{ mine_folder }}eula.txt"
+    regexp: "^eula="
+    line: "eula=true"
+
+- name: correcting the rights
+  ansible.builtin.file:
+    dest: "{{ mine_folder }}"
+    owner: jeffrey
+    group: jeffrey
+    recurse: true
+
+- name: java settings setup
+  ansible.builtin.lineinfile:
+    path: "{{ mine_folder }}user_jvm_args.txt"
+    line: "{{ item }}"
+  loop:
+    - "-Xms2500M"
+    - "-Xmx5G"
+
+- name: server properties template
+  ansible.builtin.template:
+    src: templates/server.properties.j2
+    dest: "{{ mine_folder }}server.properties"
+    owner: jeffrey
+    group: jeffrey
+    mode: '0644'

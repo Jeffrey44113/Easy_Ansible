@@ -1,0 +1,16 @@
+[Unit]
+Description=Minecraft 
+After=syslog.target network.target
+
+[Service]
+User=root
+WorkingDirectory={{ mine_folder }}
+User=jeffrey
+Group=jeffrey
+ExecStart=/bin/bash ./run.sh
+Restart=always
+RestartSec=30
+StandardInput=null
+
+[Install]
+WantedBy=multi-user.target

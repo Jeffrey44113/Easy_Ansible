@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true
+  vars_files:
+    - vars/vars.yml
+
+  pre_tasks:
+    - name: first steps
+      ansible.builtin.include_tasks: tasks/0-getting_ready.yml
+
+  tasks:
+    - name: step 1
+      ansible.builtin.include_tasks: tasks/1-installing_srv.yml
+    - name: step2
+      ansible.builtin.include_tasks: tasks/2-system_config.yml
