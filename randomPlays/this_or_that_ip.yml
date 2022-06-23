@@ -1,0 +1,15 @@
+- hosts: all
+  become: true
+  gather_facts: false
+
+  tasks: 
+  - name: check if IP is reachable and saves it
+    ansible.builtin.wait_for:
+      host: '{{ (ansible_ssh_host|default(ansible_host)|default(inventory_hostname)) }}'
+      timeout: 20
+    register: waitfor
+    ignore_unreachable: yes
+  
+  - name: setting ssh_host fact to other IP variable
+    ansible.builtin.set_fact: ansible_ssh_host="{{ ansible_extraip0 }}"
+    when: waitfor is search('Failed to connect to the host via ssh')
